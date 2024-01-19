@@ -1,26 +1,60 @@
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 const asyncHandler = require(express-async-handler)
 const Usuario = require('../model/usuariosModel')
 
 const login = asyncHandler ( async (req, res) => {
-    if(!req.body.email || !req.body.password){
+    const {email, password} = req.body
+
+    const usuario = await Usuario.findOne({email})
+    if(usuario && (await bcrypt.compare(password, user.password))){
+        res.status(200).json({
+            _id : usuario.id,
+            name: usuario.name,
+            email: usuario.email
+        })
+    }else{
         res.status(400)
-        throw new Error ("Hace falta email y/o password")
+        throw new Error('Credenciales incorrectas')
     }
-    res.status(200).json({message:'Logueo'})
  })
 
  const registrarUsuario = asyncHandler ( async (req, res) => {
-    if(!req.body.email || !req.body.password || !req.body.nombre){
+    const { nombre, email, password } = req.body
+    if(!nombre || !email || !password){
         res.status(400)
-        throw new Error ("Hacen faltan valores")
+        throw new Error("Faltan datos. Favor de verificar")
     }
+
+    //Verificar si el usuario existe
+    const usuarioExiste = await Usuario.findOne({email})
+    if(usuarioExiste){
+        res.status(400)
+        throw new Error ("Ese usuario ya existe")
+    }
+
+    //hash al password
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(password, salt)
+
+    //Creamos el nuevo usuario en la base
     const usuario = await Usuario.create({
-        nombre: req.body.nombre,
-        email: req.body.nombre,
-        password: req.body.password
+        nombre, 
+        email,
+        password: hashedPassword
     })
-  
-    res.status(201).json({usuario})
+
+    if(usuario){
+        res.status(201).json({
+            _id: user._id,
+            nombre: usuario.name,
+            email: usuario.email,
+            admin: usuario.esAdmin
+        })
+    }else{
+        res.status(400)
+        throw new Error ("No se pudieron guardar los datos")
+    }
 })
 
 
