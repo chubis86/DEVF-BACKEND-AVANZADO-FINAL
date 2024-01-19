@@ -4,9 +4,8 @@ const dotenv = require('dotenv').config()
 const port = process.env.PORT || 5000
 const app = express()
 
-//Esto es para probar ya que lo correcto sería tener una carpeta de rutas y no todo en el archivo server.js
-app.get('/api/tareas', (req, res)=>{
-    res.status(200).json({message:'Obtener algo'})
-})
+app.use('/api/usuarios', require('./routes/usuariosRoutes'))
+app.use('/api/productos', require('./routes/productosRoutes'))
+app.use('/api/pedidos', require('./routes/pedidosRoutes'))
 
 app.listen(port, () => console.log(`Servidor iniciado en puerto ${port}`))  
