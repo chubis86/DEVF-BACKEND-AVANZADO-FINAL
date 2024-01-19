@@ -1,4 +1,4 @@
-const asyncHandler = require(express-async-hanldler)
+const asyncHandler = require(express-async-handler)
 
 const login = asyncHandler ( async (req, res) => {
     if(!req.body.email || !req.body.password){
