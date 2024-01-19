@@ -1,18 +1,11 @@
-
 const express = require('express')
 const router = express.Router()
+const { login, registrarUsuario } = require('../controllers/usuariosController')
 
-router.get('/', (req, res)=>{
-    res.status(200).json({message:'Obtener algo'})
-})
+router.post('/', login)
 
-router.post('/', (req, res)=>{
-    res.status(201).json({message:'Crear usuario'})
-})
+router.post('/registrar', registrarUsuario)
 
-router.put('/:id', (req, res)=>{
-    res.status(200).json({message:`Modificar la tarea número ${req.params.id}`})
-})
 
 
 module.exports = router
