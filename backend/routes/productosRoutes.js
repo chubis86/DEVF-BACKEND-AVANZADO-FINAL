@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 const { obtenerProductos, crearProductos, modificarProductos, eliminarProductos } = require('../controllers/productosController')
 
-router.get('/', obtenerProductos)
+
+router.get('/',  obtenerProductos)
 
 router.post('/', crearProductos)
 

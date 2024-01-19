@@ -1,12 +1,13 @@
 const express = require('express')
 const router = express.Router()
 const { verPedido, crearPedido, eliminarPedido } = require('../controllers/pedidosController')
+const { protect } = require('../middleware/authMiddleware')
 
-router.get('/', verPedido)
+router.get('/', protect, verPedido)
 
-router.post('/', crearPedido)
+router.post('/', protect, crearPedido)
 
-router.delete('/:id', eliminarPedido)
+router.delete('/:id', protect, eliminarPedido)
 
 
 module.exports = router

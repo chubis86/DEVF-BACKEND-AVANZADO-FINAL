@@ -5,7 +5,7 @@ const tareaSchema = mongoose.Schema({
     nombre: {
         type: String,
         required:[true, "Por favor teclea el nombre del producto"]
-    },
+    }
 
     
 },{
