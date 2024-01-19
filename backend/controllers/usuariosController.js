@@ -11,7 +11,8 @@ const login = asyncHandler ( async (req, res) => {
         res.status(200).json({
             _id : usuario.id,
             name: usuario.name,
-            email: usuario.email
+            email: usuario.email,
+            token: generarToken(usuario.id)
         })
     }else{
         res.status(400)
@@ -57,6 +58,11 @@ const login = asyncHandler ( async (req, res) => {
     }
 })
 
+const generarToken = (id) => {
+    return jwt.sign({id}, process.env.JWT_SECRET, {
+        expiresIn:'30d'
+    })
+}
 
 module.exports = {
    login,
