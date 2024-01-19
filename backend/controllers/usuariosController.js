@@ -1,4 +1,5 @@
 const asyncHandler = require(express-async-handler)
+const Usuario = require('../model/usuariosModel')
 
 const login = asyncHandler ( async (req, res) => {
     if(!req.body.email || !req.body.password){
@@ -13,7 +14,13 @@ const login = asyncHandler ( async (req, res) => {
         res.status(400)
         throw new Error ("Hacen faltan valores")
     }
-    res.status(200).json({message:'Usuario registrado'})
+    const usuario = await Usuario.create({
+        nombre: req.body.nombre,
+        email: req.body.nombre,
+        password: req.body.password
+    })
+  
+    res.status(201).json({usuario})
 })
 
 
