@@ -1,10 +1,11 @@
-const asyncHandler = require(express-async-handler)
+const asyncHandler = require('express-async-handler')
 const Pedido = require('../model/pedidosModel')
+
 
 
 const verPedido = asyncHandler ( async (req, res) => {
     const pedidos = await Pedido.find({usuario:req.usuario.id})
-    res.status(200).json({message:'Ver pedidos'})
+    res.status(200).json({pedidos})
  })
 
 const crearPedido = asyncHandler (async (req, res) => {
@@ -23,7 +24,7 @@ const crearPedido = asyncHandler (async (req, res) => {
 
  const eliminarPedido = asyncHandler (async (req, res) => {
     const pedido = await Pedido.findById(req.params.id)
-    if(!pedido){
+    if(!pedido || pedido.usuario!=req.usuario.id){
         res.status(400)
         throw new Error('El pedido no fue encontrado')
     } 

@@ -1,6 +1,6 @@
 const mongoose= require('mongoose')
 
-const tareaSchema = mongoose.Schema({
+const productoSchema = mongoose.Schema({
 
     nombre: {
         type: String,
@@ -12,4 +12,4 @@ const tareaSchema = mongoose.Schema({
     timestamps: true
 })
 
-module.exports = mongoose.model('Producto', tareaSchema)
+module.exports = mongoose.model('Producto', productoSchema)

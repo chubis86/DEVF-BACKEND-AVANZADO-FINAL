@@ -1,15 +1,16 @@
 const express = require('express')
 const router = express.Router()
 const { obtenerProductos, crearProductos, modificarProductos, eliminarProductos } = require('../controllers/productosController')
+const { protect } = require('../middleware/authMiddleware')
 
 
-router.get('/',  obtenerProductos)
+router.get('/', protect, obtenerProductos)
 
-router.post('/', crearProductos)
+router.post('/', protect, crearProductos)
 
-router.put('/:id', modificarProductos)
+router.put('/:id', protect, modificarProductos)
 
-router.delete('/:id', eliminarProductos)
+router.delete('/:id', protect, eliminarProductos)
 
 
 

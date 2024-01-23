@@ -1,17 +1,18 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const asyncHandler = require(express-async-handler)
+const asyncHandler = require('express-async-handler')
 const Usuario = require('../model/usuariosModel')
 
 const login = asyncHandler ( async (req, res) => {
     const {email, password} = req.body
 
     const usuario = await Usuario.findOne({email})
-    if(usuario && (await bcrypt.compare(password, user.password))){
+    if(usuario && (await bcrypt.compare(password, usuario.password))){
         res.status(200).json({
             _id : usuario.id,
             name: usuario.name,
             email: usuario.email,
+            esAdmin: usuario.esAdmin,
             token: generarToken(usuario.id)
         })
     }else{
@@ -47,7 +48,7 @@ const login = asyncHandler ( async (req, res) => {
 
     if(usuario){
         res.status(201).json({
-            _id: user._id,
+            _id: usuario._id,
             nombre: usuario.name,
             email: usuario.email,
             admin: usuario.esAdmin

@@ -6,6 +6,7 @@ const connectDB = require('./config/db')
 const app = express()
 const { errorHandler } = require('./middleware/errorMiddleware')
 
+app.use(express.urlencoded({ extended: true }));
 app.use('/api/usuarios', require('./routes/usuariosRoutes'))
 app.use('/api/productos', require('./routes/productosRoutes'))
 app.use('/api/pedidos', require('./routes/pedidosRoutes')) 

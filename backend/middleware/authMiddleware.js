@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
-const User = require('../model/usuariosModel')
+const Usuario = require('../model/usuariosModel')
 
 const protect = asyncHandler(async (req, res, next) => {
 
@@ -23,7 +23,7 @@ const protect = asyncHandler(async (req, res, next) => {
         } catch (error) {
             console.log(error)
             res.status(401)
-            throw new Error('Acceso no autorizado')
+            throw new Error('Acceso no autorizado. Error en el token')
         }
     }
 

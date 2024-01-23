@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const userSchema = mongoose.Schema({
+const usuarioSchema = mongoose.Schema({
     nombre: {
         type: String,
         required: [true, 'Por favor teclea tu nombre']
@@ -24,4 +24,4 @@ const userSchema = mongoose.Schema({
 }
 )
 
-module.exports = mongoose.model('Usuario', userSchema)
+module.exports = mongoose.model('Usuario', usuarioSchema)
